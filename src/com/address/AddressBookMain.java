@@ -3,9 +3,9 @@ import java.util.*;
 
 public class AddressBookMain {
 	public ContactPerson contactPerson;
-	public List<ContactPerson> addressBook = new ArrayList<>();
+	public Set<ContactPerson> addressBook = new TreeSet<>(new Test());
 	
-	public List<ContactPerson> getAddressBook() {
+	public Set<ContactPerson> getAddressBook() {
 		return addressBook;
 	}
 
@@ -18,29 +18,26 @@ public class AddressBookMain {
 	}
 
 	public void editContactPersonDetailsByName(String name) {
-		int count=0;
 		for(ContactPerson contactPerson: addressBook) {
 			String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
 			if(name.equals(personName)) {
+				addressBook.remove(contactPerson);
 				contactPerson = AddressBookMain.addContactPersonDetails();
-				addressBook.set(count,contactPerson);
+				addressBook.add(contactPerson);
 				System.out.println("Contact Deatails of the person: "+name+" is edited");
 				break;
 			}
-			count++;
 		}
 	}
 	
 	public void deleteContactPersonDetailsByName(String name) {
-		int count=0;
 		for(ContactPerson contactPerson: addressBook) {
 			String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
 			if(name.equals(personName)) {
-				addressBook.remove(count);
+				addressBook.remove(contactPerson);
 				System.out.println("Contact Deatails of the person: "+name+" is deleted");
 				break;
 			}
-			count++;
 		}
 	}
 	
@@ -80,7 +77,7 @@ public class AddressBookMain {
 			ContactPerson personDetails=addressBookMain.addContactPersonDetails();
 			addressBookMain.addContactPersonDetails(personDetails);
 		}
-		
+	
 		System.out.println("List of the person's details");
 		for(ContactPerson contactPerson: addressBookMain.getAddressBook()) {
 			System.out.println(contactPerson);

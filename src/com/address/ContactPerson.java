@@ -5,7 +5,7 @@ public class ContactPerson {
 	private int zip;
 	private long phoneNo;
 	private String emailId;
-	
+ 
 	public String getFirstName() {
 		return firstName;
 	}
