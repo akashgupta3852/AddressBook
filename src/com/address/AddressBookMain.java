@@ -86,16 +86,16 @@ public class AddressBookMain {
 		System.out.println("Enter the address:");
 		sc.nextLine();
 		String address=sc.nextLine();
-//		System.out.println("Enter the city:");
-//		String city=sc.nextLine();
-//		System.out.println("Enter the state:");
-//		String state=sc.nextLine();
-//		System.out.println("Enter the zip:");
-//		int zip=sc.nextInt();
-//		System.out.println("Enter the phoneNo:");
-//		long phoneNo=sc.nextLong();
-//		System.out.println("Enter the email:");
-//		String emailId=sc.next();
+		System.out.println("Enter the city:");
+		String city=sc.nextLine();
+		System.out.println("Enter the state:");
+		String state=sc.nextLine();
+		System.out.println("Enter the zip:");
+		int zip=sc.nextInt();
+		System.out.println("Enter the phoneNo:");
+		long phoneNo=sc.nextLong();
+		System.out.println("Enter the email:");
+		String emailId=sc.next();
 		
 		ContactPerson personDetails=new ContactPerson(firstName,lastName,address);
 		return personDetails;
@@ -123,7 +123,7 @@ public class AddressBookMain {
 				addressBookMain.addContactPersonDetails(personDetails);
 			}
 	
-			addressBookMain.addAddressBookToSystem(addressBookName,addressBook);
+			addAddressBookToSystem(addressBookName,addressBook);
 		}
 		
 		System.out.println("List of the person's details");
