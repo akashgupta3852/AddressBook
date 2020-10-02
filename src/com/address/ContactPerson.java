@@ -38,15 +38,15 @@ public class ContactPerson {
 		return emailId;
 	}
 
-	public ContactPerson(String firstName, String lastName, String address) {
+	public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip, long phoneNo, String emailId) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-//		this.city = city;
-//		this.state = state;
-//		this.zip = zip;
-//		this.phoneNo = phoneNo;
-//		this.emailId = emailId;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.phoneNo = phoneNo;
+		this.emailId = emailId;
 	}
 
 	@Override
