@@ -102,34 +102,38 @@ public class AddressBookMain {
 		}
 	}
 	
-	public static Set<String> searchPersonByCity(String city) {		
-		Set<String> personsInCity =new TreeSet<>(); 
+	public static List<String> searchPersonByCityorState(String cityOrState) {		
+		List<String> personsInCityOrState =new ArrayList<>(); 
 		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			Set<ContactPerson> phoneBook=me.getValue();
 			for(ContactPerson contactPerson : phoneBook)
 			{
-				String name=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+				String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
 				String cityName=contactPerson.getCity();
-				if(cityName.equals(city)) 
-					personsInCity.add(name);
+				String stateName=contactPerson.getState();
+				if(cityName.equals(cityOrState) || stateName.equals(cityOrState)) 
+					personsInCityOrState.add(personName);
 			}	
 		}
-		return personsInCity;
+		return personsInCityOrState;
 	}
 	
-	public static Set<String> searchPersonByState(String state) {		
-		Set<String> personsInState =new TreeSet<>(); 
+	public static Map<String,List<String>> viewPersonByCityOrState(String cityOrState) {	
+		List<String> personsInCityOrState =new ArrayList<>(); 
+		Map<String,List<String>> personCityStateMap =new HashMap<>(); 
 		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			Set<ContactPerson> phoneBook=me.getValue();
 			for(ContactPerson contactPerson : phoneBook)
 			{
-				String name=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+				String personName=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+				String cityName=contactPerson.getCity();
 				String stateName=contactPerson.getState();
-				if(stateName.equals(state)) 
-					personsInState.add(name);
+				if(cityName.equals(cityOrState) || stateName.equals(cityOrState)) 
+					personsInCityOrState.add(personName);
 			}	
 		}
-		return personsInState;
+		personCityStateMap.put(cityOrState,personsInCityOrState);
+		return personCityStateMap;
 	}
 	
 	public static ContactPerson addContactPersonDetails(){
@@ -231,26 +235,30 @@ public class AddressBookMain {
 		else
 			System.out.println("Sorry, the "+bookName1+" is not found in the system. We can't proceed to delete.");
 		
-		System.out.println("Enter the city name to search:");
-		String cityName=sc.nextLine();
-		Set<String> personsInCity = searchPersonByCity(cityName);
-		if(personsInCity.size()==0)
-			System.out.println("Sorry, there is no person in the "+cityName+".");
+		System.out.println("Enter the state/city name to search the persons:");
+		String cityOrStateName = sc.nextLine();
+		List<String> personsInCityOrState = searchPersonByCityorState(cityOrStateName);
+		if(personsInCityOrState.size()==0)
+			System.out.println("Sorry, there is no person in the "+cityOrStateName+".");
 		else {
-			System.out.println("The list of persons in the "+cityName+":");
-			for(String name : personsInCity) 
-				System.out.println(name);
+			System.out.println("The list of persons in the "+cityOrStateName+":");
+			for(String personName : personsInCityOrState) 
+				System.out.println(personName);
 		}
 		
-		System.out.println("Enter the state name to search:");
-		String stateName=sc.nextLine();
-		Set<String> personsInState = searchPersonByState(stateName);
-		if(personsInState.size()==0)
-			System.out.println("Sorry, there is no person in the "+stateName+".");
+		System.out.println("Enter the state/city name to view the persons:");
+		String cityStateName = sc.nextLine();
+		Map<String,List<String>> personCityStateMap = viewPersonByCityOrState(cityStateName);
+		if(personCityStateMap.size()==0)
+			System.out.println("Sorry, there is no person in the "+cityStateName+".");
 		else {
-			System.out.println("The list of persons in the "+stateName+":");
-			for(String name : personsInState) 
-				System.out.println(name);
+			System.out.println("The list of persons in the "+cityStateName+":");
+			System.out.println(personCityStateMap);
+//			for(Map.Entry<String, List<String>> me : personCityStateMap.entrySet()) {
+//				List<String> personsInCityState=me.getValue();
+//				for(String name : personsInCityState) 
+//					System.out.println(name);
+//			}
 		}
 	}
 			
