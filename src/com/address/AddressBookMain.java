@@ -102,6 +102,36 @@ public class AddressBookMain {
 		}
 	}
 	
+	public static Set<String> searchPersonByCity(String city) {		
+		Set<String> personsInCity =new TreeSet<>(); 
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
+			Set<ContactPerson> phoneBook=me.getValue();
+			for(ContactPerson contactPerson : phoneBook)
+			{
+				String name=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+				String cityName=contactPerson.getCity();
+				if(cityName.equals(city)) 
+					personsInCity.add(name);
+			}	
+		}
+		return personsInCity;
+	}
+	
+	public static Set<String> searchPersonByState(String state) {		
+		Set<String> personsInState =new TreeSet<>(); 
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
+			Set<ContactPerson> phoneBook=me.getValue();
+			for(ContactPerson contactPerson : phoneBook)
+			{
+				String name=contactPerson.getFirstName()+" "+contactPerson.getLastName();
+				String stateName=contactPerson.getState();
+				if(stateName.equals(state)) 
+					personsInState.add(name);
+			}	
+		}
+		return personsInState;
+	}
+	
 	public static ContactPerson addContactPersonDetails(){
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the first name:");
@@ -200,6 +230,28 @@ public class AddressBookMain {
 		}
 		else
 			System.out.println("Sorry, the "+bookName1+" is not found in the system. We can't proceed to delete.");
+		
+		System.out.println("Enter the city name to search:");
+		String cityName=sc.nextLine();
+		Set<String> personsInCity = searchPersonByCity(cityName);
+		if(personsInCity.size()==0)
+			System.out.println("Sorry, there is no person in the "+cityName+".");
+		else {
+			System.out.println("The list of persons in the "+cityName+":");
+			for(String name : personsInCity) 
+				System.out.println(name);
+		}
+		
+		System.out.println("Enter the state name to search:");
+		String stateName=sc.nextLine();
+		Set<String> personsInState = searchPersonByState(stateName);
+		if(personsInState.size()==0)
+			System.out.println("Sorry, there is no person in the "+stateName+".");
+		else {
+			System.out.println("The list of persons in the "+stateName+":");
+			for(String name : personsInState) 
+				System.out.println(name);
+		}
 	}
 			
 }
