@@ -246,6 +246,8 @@ public class AddressBookMain {
 				System.out.println(personName);
 		}
 		
+		System.out.println("The number of person in the "+cityOrStateName+" is:"+personsInCityOrState.size());
+		
 		System.out.println("Enter the state/city name to view the persons:");
 		String cityStateName = sc.nextLine();
 		Map<String,List<String>> personCityStateMap = viewPersonByCityOrState(cityStateName);
@@ -253,8 +255,10 @@ public class AddressBookMain {
 			System.out.println("Sorry, there is no person in the "+cityStateName+".");
 		else {
 			System.out.println("The list of persons in the "+cityStateName+":");
-			System.out.println(personCityStateMap);
+			System.out.println(personCityStateMap.values());
 		}
+		
+		System.out.println("The number of person in the "+cityStateName+" is:"+personCityStateMap.values().size());
 	}
 			
 }
