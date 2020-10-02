@@ -2,10 +2,10 @@ package com.address;
 import java.util.*;
 
 public class AddressBookMain {
-	private List<ContactPerson> addressBook =new ArrayList<>();
-	private static Map<String, List<ContactPerson>> addressBookSystem = new TreeMap<>();
+	private Set<ContactPerson> addressBook =new HashSet<>();
+	private static Map<String, Set<ContactPerson>> addressBookSystem = new TreeMap<>();
 	
-	public List<ContactPerson> getAddressBook(){
+	public Set<ContactPerson> getAddressBook(){
 		return addressBook;
 	}
 	
@@ -13,12 +13,12 @@ public class AddressBookMain {
 		addressBook.add(contactPerson);
 	}
 	
-	public static void addAddressBookToSystem(String addressBookName, List<ContactPerson> addressBook) {
+	public static void addAddressBookToSystem(String addressBookName, Set<ContactPerson> addressBook) {
 		addressBookSystem.put(addressBookName, addressBook);
 	}
 
 	public static boolean isPresentAddressBook(String phoneBookName) {
-		for(Map.Entry<String, List<ContactPerson>> me : addressBookSystem.entrySet()) {
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			String phBookName= me.getKey();
 			if(phBookName.equals(phoneBookName)) 
 				return true;
@@ -27,9 +27,9 @@ public class AddressBookMain {
 	}
 	
 	public static boolean editContactPersonDetailsByName(String phoneBookName, String personName) {
-		for(Map.Entry<String, List<ContactPerson>> me : addressBookSystem.entrySet()) {
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			String phBookName= me.getKey();
-			List<ContactPerson> phoneBook=me.getValue();	
+			Set<ContactPerson> phoneBook=me.getValue();	
 			if(phBookName.equals(phoneBookName)) {
 				for(ContactPerson contactPerson : phoneBook)
 				{
@@ -48,9 +48,9 @@ public class AddressBookMain {
 	}
 	
 	public static boolean deleteContactPersonDetailsByName(String phoneBookName, String personName) {
-		for(Map.Entry<String, List<ContactPerson>> me : addressBookSystem.entrySet()) {
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			String phBookName= me.getKey();
-			List<ContactPerson> phoneBook=me.getValue();
+			Set<ContactPerson> phoneBook=me.getValue();
 			if(phBookName.equals(phoneBookName)) {
 				for(ContactPerson contactPerson : phoneBook)
 				{
@@ -67,9 +67,9 @@ public class AddressBookMain {
 	}
 	
 	public static void showAddressBook(String phoneBookName) {
-		for(Map.Entry<String, List<ContactPerson>> me : addressBookSystem.entrySet()) {
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			String phBookName= me.getKey();
-			List<ContactPerson> phoneBook=me.getValue();
+			Set<ContactPerson> phoneBook=me.getValue();
 			if(phBookName.equals(phoneBookName)) {
 				if(phoneBook.size()==0) {
 					System.out.println("Sorry, there is no contact left in the "+phoneBookName+" after deletion.");
@@ -87,9 +87,9 @@ public class AddressBookMain {
 	}
 	
 	public static void showAddressBookSystem() {
-		for(Map.Entry<String, List<ContactPerson>> me : addressBookSystem.entrySet()) {
+		for(Map.Entry<String, Set<ContactPerson>> me : addressBookSystem.entrySet()) {
 			String phoneBookName= me.getKey();
-			List<ContactPerson> phoneBook=me.getValue();
+			Set<ContactPerson> phoneBook=me.getValue();
 			System.out.println("The contact details of the "+phoneBookName+":");
 			if(phoneBook.size()==0) {
 				System.out.println("Sorry, there is no contact in the "+phoneBookName+".");
@@ -149,7 +149,7 @@ public class AddressBookMain {
 				addressBookMain.addContactPersonDetails(personDetails);
 			}
 
-			List<ContactPerson> addressBook = addressBookMain.getAddressBook();
+			Set<ContactPerson> addressBook = addressBookMain.getAddressBook();
 			addAddressBookToSystem(addressBookName,addressBook);
 		}
 		
