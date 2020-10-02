@@ -254,11 +254,6 @@ public class AddressBookMain {
 		else {
 			System.out.println("The list of persons in the "+cityStateName+":");
 			System.out.println(personCityStateMap);
-//			for(Map.Entry<String, List<String>> me : personCityStateMap.entrySet()) {
-//				List<String> personsInCityState=me.getValue();
-//				for(String name : personsInCityState) 
-//					System.out.println(name);
-//			}
 		}
 	}
 			
